@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for("uploaded_file", filename="background-image.jpg") }}');
+            background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('uploaded_file', filename='logo.png') }}" alt="Logo" class="logo">
+    </header>
+    <div class="container">
+        <h1>Home Page</h1>
+        {% if username %}
+            <p>Hello, {{username}}! You are already logged in.</p>
+            <p><a href="/logout">Logout</a></p>
+        {% else %}
+            <p>You are not logged in. Please <a href="/login">login</a> to access the home page.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

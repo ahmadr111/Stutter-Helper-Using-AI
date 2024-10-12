@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Results</title>
+    <style>
+        body {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Results</h2>
+        {% for data in result_data %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ data.filename }}</h5>
+                    
+                    <!-- Display final audio -->
+                    <div class="form-group">
+                        <label>Final Audio:</label>
+                        <audio controls class="mt-2">
+                            <source src="{{ url_for('static', filename='regenerate_audio/' + data.final_audio_path) }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    
+                    <!-- Display final prediction -->
+                    <div class="form-group">
+                        <label for="final_prediction">Final Prediction:</label>
+                        <input type="text" class="form-control" id="final_prediction" value="{% if data.final_prediction == 1 %}Not-Stuttering{% else %}Not-Stuttering{% endif %}" readonly>
+                    </div>
+
+                    <!-- Display Inhanced text -->
+                    <div class="form-group">
+                        <label for="Inhanced_text">Inhanced_text:</label>
+                        <textarea class="form-control" id="text" readonly>{{ data.text }}</textarea>
+                    </div>
+                    
+                        <!-- Display corrected text -->
+                        <div class="form-group">
+                            <label for="corrected_text">Corrected Text:</label>
+                            <textarea class="form-control" id="corrected_text" readonly>{{ data.corrected_text }}</textarea>
+                        </div>
+
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
